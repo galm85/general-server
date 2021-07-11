@@ -8,7 +8,7 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     destination:(req,file,cb)=>{
         if(file){
-            cb(null,'./uploads/photographer');
+            cb(null,'./uploads/photographer/photos');
         }
     },
     filename:(req,file,cb)=>{
@@ -19,6 +19,8 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({storage:storage})
+
+
 
 
 // =====================  Routes =============================================
@@ -70,6 +72,7 @@ router.patch('/edit-photo/:photoId',upload.single('image'),async(req,res)=>{
 //get images by photographer id
 router.get('/album/:photographerID',async(req,res)=>{
     try {
+        console.log(req.params.photographerID);
         const images = await Photo.find({photographerID:req.params.photographerID})
         res.status(200).send(images);
     } catch (error) {
@@ -99,6 +102,22 @@ router.delete('/delete-image/:imageId',async(req,res)=>{
     }
 })
 
+
+
+// update likes of a photo
+router.patch('/update-likes/:photoId',async(req,res)=>{
+    let operator = req.body.operator;
+    let {likes} = await Photo.findOne({_id:req.params.photoId});
+    if (operator == '+'){
+        likes = likes +1;
+    }
+    if(operator == '-'){
+        likes = likes -1;
+    }
+    await Photo.findByIdAndUpdate(req.params.photoId,{likes:likes});
+    res.status(200).send('update Likes');
+
+})
 
 
 
