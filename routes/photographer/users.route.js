@@ -53,16 +53,32 @@ router.post('/',upload.single('image'),async(req,res)=>{
     if(req.file){
         user.image = req.file.path;
     }else{
-        user.image = '/uploads/no-user.png';
+        user.image = 'uploads/photographer/users/no-user.png';
     }
     
     await user.save();
     res.status(200).send('Welcome' + user.firstName);
-   
-
-
 
 })
+
+
+//Edit user profile
+router.patch('/edit-user/:userId',upload.single('image'),async(req,res)=>{
+    
+    let newUser = req.body;
+    if(req.body.password){
+        const salt = await bcrypt.genSalt(10);
+        newUser.password = await bcrypt.hash(req.body.password,salt);
+    }
+    if(req.file){
+        newUser.image = req.file.path;
+    }
+
+    await User.findByIdAndUpdate(req.params.userId,newUser);
+    res.status(200).send('User Update');
+
+})
+
 
 
 //sign in 
@@ -80,6 +96,8 @@ router.post('/sign-in',async(req,res)=>{
 
 
 })
+
+
 
 
 //add like photo
@@ -108,6 +126,12 @@ router.get('/get-user-data/:userId',async(req,res)=>{
     res.json(user);
 })
 
+
+// Delete User 
+router.delete('/delete-user/:userId',async(req,res)=>{
+    await User.findByIdAndRemove(req.params.userId);
+    res.status(200).send('User Deleted');
+})
 
 
 

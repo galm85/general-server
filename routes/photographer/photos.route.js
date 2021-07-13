@@ -72,7 +72,6 @@ router.patch('/edit-photo/:photoId',upload.single('image'),async(req,res)=>{
 //get images by photographer id
 router.get('/album/:photographerID',async(req,res)=>{
     try {
-        console.log(req.params.photographerID);
         const images = await Photo.find({photographerID:req.params.photographerID})
         res.status(200).send(images);
     } catch (error) {
@@ -117,6 +116,14 @@ router.patch('/update-likes/:photoId',async(req,res)=>{
     await Photo.findByIdAndUpdate(req.params.photoId,{likes:likes});
     res.status(200).send('update Likes');
 
+})
+
+
+//get Populars (by likes) photos
+router.get('/populars',async(req,res)=>{
+    const photos = await Photo.find({}).sort({'likes':-1}).limit(10);
+    //const products = await Product.find({}).sort({'sells':-1}).limit(4);
+    res.status(200).send(photos);
 })
 
 
