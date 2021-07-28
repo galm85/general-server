@@ -4,13 +4,17 @@ const mongoose = require('mongoose');
 const houseSchema = new mongoose.Schema({
     mainCategory:{type:String,required:true},
     houseCategory:{type:String,required:true},
-    rent:{type:Boolean,required:true},
+    floor:{type:Number},
+    parking:{type:Boolean,default:false},
+    rent:{type:Boolean,default:false},
     price:{type:Number,required:true},
     images:{type:[String],required:true},
-    contectName:{type:String,required:true},
-    contectPhone:{type:String,required:true},
-    contectEmail:{type:String,required:true},
-    contectCity:{type:String,required:true},
+    description:{type:String},
+    constactId:{type:String,required:true},
+    contactName:{type:String,required:true},
+    contactPhone:{type:String,required:true},
+    contactEmail:{type:String,required:true},
+    contactCity:{type:String,required:true},
 
 },{timestamps:true})
 
