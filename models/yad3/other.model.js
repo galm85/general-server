@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 
 
-const carSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
     mainCategory:{type:String,required:true},
-    carCategory:{type:String,required:true},
-    brand:{type:String,required:true},
-    model:{type:String,required:true},
-    year:{type:String,required:true},
+    title:{type:String,required:true},
+    condition:{type:String,required:true},
     price:{type:Number,required:true},
     images:{type:[String],required:true},
     description:{type:String},
@@ -22,9 +20,9 @@ const carSchema = new mongoose.Schema({
 
 
 
-const Car = mongoose.model('yad3-car',carSchema);
+const Product = mongoose.model('yad3-product',productSchema);
 
-module.exports = Car;
+module.exports = Product;
 
 
 

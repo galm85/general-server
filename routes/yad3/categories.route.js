@@ -81,54 +81,7 @@ router.delete('/delete-category/:categoryId',async(req,res)=>{
 
 
 
-// //get images by photographer id
-// router.get('/album/:photographerID',async(req,res)=>{
-//     try {
-//         const images = await Photo.find({photographerID:req.params.photographerID})
-//         res.status(200).send(images);
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// })
 
-
-// //get single photo by id
-// router.get('/single-image/:imageId',async(req,res)=>{
-//     try {
-//         const photo = await Photo.findById(req.params.imageId);
-//         res.send(200).send(photo)
-//     } catch (error) {
-//         res.status(400).send(error)
-//     }
-// })
-
-
-
-
-
-
-// // update likes of a photo
-// router.patch('/update-likes/:photoId',async(req,res)=>{
-//     let operator = req.body.operator;
-//     let {likes} = await Photo.findOne({_id:req.params.photoId});
-//     if (operator == '+'){
-//         likes = likes +1;
-//     }
-//     if(operator == '-'){
-//         likes = likes -1;
-//     }
-//     await Photo.findByIdAndUpdate(req.params.photoId,{likes:likes});
-//     res.status(200).send('update Likes');
-
-// })
-
-
-// //get Populars (by likes) photos
-// router.get('/populars',async(req,res)=>{
-//     const photos = await Photo.find({}).sort({'likes':-1}).limit(10);
-//     //const products = await Product.find({}).sort({'sells':-1}).limit(4);
-//     res.status(200).send(photos);
-// })
 
 
 
