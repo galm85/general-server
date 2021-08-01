@@ -46,27 +46,27 @@ router.post('/',upload.single('images'),async(req,res)=>{
     }
 })
 
-// // get car by userId
-// router.get('/get-cars-by-user/:userId',async(req,res)=>{
-//     try {
-//         const cars = await Car.find({contactId:req.params.userId});
-//         res.status(200).send(cars);
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// })
+// get Houses by userId
+router.get('/get-houses-by-user/:userId',async(req,res)=>{
+    try {
+        const houses = await House.find({contactId:req.params.userId});
+        res.status(200).send(houses);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+})
 
 
 
-// //delete car
-// router.delete('/delete-car/:carId',async(req,res)=>{
-//     try {
-//         await Car.findByIdAndRemove(req.params.carId);
-//         res.status(200).send('car deleted');
-//     } catch (error) {
-//         res.status(400).send(error);
-//     }
-// })
+//delete house
+router.delete('/delete-house/:houseId',async(req,res)=>{
+    try {
+        await House.findByIdAndRemove(req.params.houseId);
+        res.status(200).send('House deleted');
+    } catch (error) {
+        res.status(400).send(error);
+    }
+})
 
 
 // //edit photo

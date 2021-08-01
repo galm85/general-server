@@ -72,7 +72,15 @@ router.post('/sign-in',async(req,res)=>{
 })
 
 
-
+//Delete user
+router.delete('/delete-user/:userId',async(req,res)=>{
+    try{
+        await User.findByIdAndRemove(req.params.userId);
+        res.status(200).send('User deleted');
+    }catch(error){
+        res.status(400).send(error);
+    }
+})
 
 
 

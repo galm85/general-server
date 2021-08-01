@@ -13,6 +13,7 @@ router.use('/cars',carsRoute);
 router.use('/users',usersRoute);
 router.use('/users',usersRoute);
 router.use('/houses',housesRoute);
+router.use('/products',productsRoute);
 
 
 
