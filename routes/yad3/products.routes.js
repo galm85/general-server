@@ -82,4 +82,27 @@ router.delete('/delete-product/:productId',async(req,res)=>{
 })
 
 
+//edit product
+router.patch('/edit-product/:productId',upload.single('images'),async(req,res)=>{
+    if(req.file){
+        try {
+            let updateProduct = req.body;
+            updateProduct.images = req.file.path;
+            await Product.findByIdAndUpdate(req.params.productId,updateProduct);
+            return res.status(200).send('Product Updated');
+        } catch (error) {
+            return res.status(400).send(error);
+        }
+    }
+        try {
+            await Product.findByIdAndUpdate(req.params.productId,req.body);
+            return res.status(200).send('Product Updated');
+        } catch (error) {
+            return res.status(400).send(error);
+        }
+       
+
+ })
+
+
 module.exports = router;
