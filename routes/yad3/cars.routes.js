@@ -69,27 +69,27 @@ router.delete('/delete-car/:carId',async(req,res)=>{
 })
 
 
-// //edit photo
-// router.patch('/edit-photo/:photoId',upload.single('image'),async(req,res)=>{
-//     if(req.file){
-//         try {
-//             let updatePhoto = req.body;
-//             updatePhoto.image = req.file.path;
-//             await Photo.findByIdAndUpdate(req.params.id,updatePhoto);
-//             return res.status(200).send('Photo Updated');
-//         } catch (error) {
-//             return res.status(400).send(error);
-//         }
-//     }
-//         try {
-//             await Photo.findByIdAndUpdate(req.params.id,req.body);
-//             return res.status(200).send('Photo Updated');
-//         } catch (error) {
-//             return res.status(400).send(error);
-//         }
+//edit photo
+router.patch('/edit-car/:carId',upload.single('images'),async(req,res)=>{
+    if(req.file){
+        try {
+            let updateCar = req.body;
+            updateCar.images = req.file.path;
+            await Car.findByIdAndUpdate(req.params.carId,updateCar);
+            return res.status(200).send('Car Updated');
+        } catch (error) {
+            return res.status(400).send(error);
+        }
+    }
+        try {
+            await Car.findByIdAndUpdate(req.params.carId,req.body);
+            return res.status(200).send('Car Updated');
+        } catch (error) {
+            return res.status(400).send(error);
+        }
        
 
-// })
+})
 
 
 // //get images by photographer id

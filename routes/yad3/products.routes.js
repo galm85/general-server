@@ -53,7 +53,6 @@ router.post('/',upload.single('images'),async(req,res)=>{
 
 //get products by category
 router.get('/products-by-category/:categoryId',async(req,res)=>{
-    console.log(req.params.categoryId);
     try {
         const products = await Product.find({mainCategory:req.params.categoryId});
         res.status(200).send(products);

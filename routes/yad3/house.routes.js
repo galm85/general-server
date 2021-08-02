@@ -35,7 +35,7 @@ router.get('/',async(req,res)=>{
 
 // post new car
 router.post('/',upload.single('images'),async(req,res)=>{
-    console.log(req.body);
+   
     try{
         let house = new House(req.body);
         house.images = req.file.path;
@@ -48,8 +48,10 @@ router.post('/',upload.single('images'),async(req,res)=>{
 
 // get Houses by userId
 router.get('/get-houses-by-user/:userId',async(req,res)=>{
+   
     try {
-        const houses = await House.find({contactId:req.params.userId});
+        const houses = await House.find({constactId:req.params.userId});
+       
         res.status(200).send(houses);
     } catch (error) {
         res.status(400).send(error);
@@ -69,27 +71,27 @@ router.delete('/delete-house/:houseId',async(req,res)=>{
 })
 
 
-// //edit photo
-// router.patch('/edit-photo/:photoId',upload.single('image'),async(req,res)=>{
-//     if(req.file){
-//         try {
-//             let updatePhoto = req.body;
-//             updatePhoto.image = req.file.path;
-//             await Photo.findByIdAndUpdate(req.params.id,updatePhoto);
-//             return res.status(200).send('Photo Updated');
-//         } catch (error) {
-//             return res.status(400).send(error);
-//         }
-//     }
-//         try {
-//             await Photo.findByIdAndUpdate(req.params.id,req.body);
-//             return res.status(200).send('Photo Updated');
-//         } catch (error) {
-//             return res.status(400).send(error);
-//         }
+//edit house
+router.patch('/edit-house/:houseId',upload.single('images'),async(req,res)=>{
+    if(req.file){
+        try {
+            let updateHouse = req.body;
+            updateHouse.images = req.file.path;
+            await House.findByIdAndUpdate(req.params.houseId,updateHouse);
+            return res.status(200).send('House Updated');
+        } catch (error) {
+            return res.status(400).send(error);
+        }
+    }
+        try {
+            await House.findByIdAndUpdate(req.params.houseId,req.body);
+            return res.status(200).send('House Updated');
+        } catch (error) {
+            return res.status(400).send(error);
+        }
        
 
-// })
+ })
 
 
 // //get images by photographer id
