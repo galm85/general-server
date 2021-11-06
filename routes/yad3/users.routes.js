@@ -39,18 +39,23 @@ router.get('/',async(req,res)=>{
 
 //register new user
 router.post('/',upload.single('image'),async(req,res)=>{
+    console.log('got it');
     try{
         let user = await User.findOne({email:req.body.email});
         if(user) return res.status(404).send('Email is taken');
         user = new User(req.body);
-        user.image = req.file.path;
+        if(req.file){
+            user.image = req.file.path;
+        }
         user.isAdmin = false;
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(req.body.password,salt);
         await user.save();
         res.status(200).send('user saved');
+        console.log('user saved');
     }catch(err){
         res.status(400).send(err);
+        console.log(err);
     }
 })
 
@@ -82,7 +87,15 @@ router.delete('/delete-user/:userId',async(req,res)=>{
     }
 })
 
-
+//getUser by id
+router.get('/get-user/:id',async(req,res)=>{
+    try {
+        const user =await User.findById(req.params.id);
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+})
 
 
 

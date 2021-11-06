@@ -21,7 +21,7 @@ app.use('/uploads',express.static('uploads'));
 
 
 // connct to db and run the server
-mongoose.connect(process.env.MONGO_URI,{
+mongoose.connect(process.env.MONGO_URI_DEV,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useFindAndModify:false
