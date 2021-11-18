@@ -7,6 +7,7 @@ require('dotenv').config();
 //Import project Routes
 const photograper = require('./routes/photographer');
 const yad3 = require('./routes/yad3');
+const school = require('./routes/school');
 
 
 //initial app
@@ -34,6 +35,7 @@ mongoose.connect(process.env.MONGO_URI_DEV,{
 //Projects Routing
 app.use('/photographer',photograper);
 app.use('/yad3',yad3);
+app.use('/school',school);
 
 
 
