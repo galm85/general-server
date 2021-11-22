@@ -4,7 +4,7 @@ const Department = require('../../models/school/Department.model');
 
 
 
-//get all courses
+//get all Departments
 router.get('/',async(req,res)=>{
     try{
         const departments = await Department.find({});
@@ -15,7 +15,7 @@ router.get('/',async(req,res)=>{
 
 })
 
-//add New Course
+//add New Department
 router.post('/',async(req,res)=>{
     
     try{
@@ -24,7 +24,7 @@ router.post('/',async(req,res)=>{
        res.status(200).send('New Department Added');
     }catch(err){
         res.status(400).send(err);
-        console.log(err);
+       
     }
 })
 
@@ -32,31 +32,23 @@ router.post('/',async(req,res)=>{
 
 
 
-//Delete Course
-router.delete('/delete-course/:courseid',async(req,res)=>{
+//Delete Department
+router.delete('/delete-department/:departmentId',async(req,res)=>{
     try{
-        await Course.findByIdAndRemove(req.params.courseid);
-        res.status(200).send('Course deleted');
+        await Department.findByIdAndRemove(req.params.departmentId);
+        res.status(200).send('Department deleted');
     }catch(error){
         res.status(400).send(error);
     }
 })
 
-//getUser by id
-router.get('/get-course/:id',async(req,res)=>{
-    try {
-        const course =await Course.findById(req.params.id);
-        res.status(200).send(course);
-    } catch (error) {
-        res.status(400).send(error);
-    }
-})
 
-//update course
-router.patch('/update-course/:id',async(req,res)=>{
+
+//update department
+router.patch('/update-department/:id',async(req,res)=>{
     try {
-        await Course.findByIdAndUpdate(req.params.id,req.body);
-        res.status(200).send('Course update');
+        await Department.findByIdAndUpdate(req.params.id,req.body);
+        res.status(200).send('Department updated');
     } catch (error) {
         res.status(400).send(error);
     }

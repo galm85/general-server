@@ -7,7 +7,17 @@ const Course = require('../../models/school/Course.model');
 //get all courses
 router.get('/',async(req,res)=>{
     try{
-        const courses = await Course.find({});
+
+         const courses = await Course.aggregate([{
+             $lookup:{
+                 from:'school-departments',
+                 localField:'department_id',
+                 foreignField:'_id',
+                 as:'department'
+             }
+         }])
+         console.log(courses);
+
         res.status(200).send(courses);
     }catch(error){
         res.status(400).send(error);
