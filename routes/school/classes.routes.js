@@ -20,6 +20,7 @@ router.post('/',async(req,res)=>{
     
     try{
        let newClass = new Clas(req.body);
+       newClass.status='active';
        await newClass.save();
        res.status(200).send('New Class Added');
     }catch(err){
